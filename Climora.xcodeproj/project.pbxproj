@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		ADAA27BD231BBFB300365194 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADAA27BB231BBFB300365194 /* LaunchScreen.storyboard */; };
-		BB375DBB2F4906F30028B842 /* Readme.Md in Sources */ = {isa = PBXBuildFile; fileRef = BB375DBA2F4906EE0028B842 /* Readme.Md */; };
+		BB375DBB2F4906F30028B842 /* Readme.md in Sources */ = {isa = PBXBuildFile; fileRef = BB375DBA2F4906EE0028B842 /* Readme.md */; };
 		BB7E65192F471BE800266DD0 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BB7E65182F471BE300266DD0 /* Config.xcconfig */; };
 /* End PBXBuildFile section */
 
@@ -16,7 +16,7 @@
 		ADAA27AD231BBFAF00365194 /* Climora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Climora.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADAA27BC231BBFB300365194 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ADAA27BE231BBFB300365194 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BB375DBA2F4906EE0028B842 /* Readme.Md */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Readme.Md; sourceTree = "<group>"; };
+		BB375DBA2F4906EE0028B842 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		BB7E65182F471BE300266DD0 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -43,7 +43,7 @@
 		ADAA27A4231BBFAF00365194 = {
 			isa = PBXGroup;
 			children = (
-				BB375DBA2F4906EE0028B842 /* Readme.Md */,
+				BB375DBA2F4906EE0028B842 /* Readme.md */,
 				BB7E65182F471BE300266DD0 /* Config.xcconfig */,
 				ADAA27AF231BBFAF00365194 /* Climora */,
 				ADAA27AE231BBFAF00365194 /* Products */,
@@ -151,7 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB375DBB2F4906F30028B842 /* Readme.Md in Sources */,
+				BB375DBB2F4906F30028B842 /* Readme.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
