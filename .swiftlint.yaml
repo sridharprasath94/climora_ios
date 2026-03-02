@@ -1,0 +1,30 @@
+included:
+  - GithubTrending
+
+excluded:
+  - Pods
+  - Carthage
+  - build
+
+opt_in_rules:
+  - multiline_arguments
+  - multiline_parameters
+  - trailing_comma
+  - empty_count
+  - explicit_init
+  - redundant_nil_coalescing
+
+line_length:
+  warning: 160
+  ignores_comments: true
+
+identifier_name:
+  min_length: 2
+  excluded:
+    - id
+
+trailing_comma:
+  mandatory_comma: true
+
+multiline_arguments: true
+multiline_parameters: true
