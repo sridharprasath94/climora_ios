@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		ADAA27BD231BBFB300365194 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADAA27BB231BBFB300365194 /* LaunchScreen.storyboard */; };
-		BB375DBB2F4906F30028B842 /* Readme.md in Sources */ = {isa = PBXBuildFile; fileRef = BB375DBA2F4906EE0028B842 /* Readme.md */; };
 		BBA5982C2F562EF900CA8409 /* .swiftlint.yaml in Resources */ = {isa = PBXBuildFile; fileRef = BBA5982B2F562EF900CA8409 /* .swiftlint.yaml */; };
 /* End PBXBuildFile section */
 
@@ -176,7 +175,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB375DBB2F4906F30028B842 /* Readme.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
