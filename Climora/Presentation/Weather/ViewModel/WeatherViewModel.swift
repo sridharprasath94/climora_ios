@@ -8,7 +8,6 @@
 import Combine
 import UIKit
 
-
 @MainActor
 final class WeatherViewModel {
 
@@ -37,14 +36,11 @@ final class WeatherViewModel {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] location in
                 guard let self = self else { return }
-                
                 let latitude = location.coordinate.latitude
                 let longitude = location.coordinate.longitude
-                
                 self.fetchCurrentWeather(for: latitude, for: longitude)
             }
             .store(in: &cancellables)
-        
         locationService.permissionDeniedPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in

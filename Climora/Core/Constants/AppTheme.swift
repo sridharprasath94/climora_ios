@@ -12,11 +12,10 @@ struct AppTheme {
 }
 
 extension AppTheme {
-    
     static let day = AppTheme(
         backgroundImageName: "day_image",
     )
-    
+
     static let night = AppTheme(
         backgroundImageName: "night_image",
     )

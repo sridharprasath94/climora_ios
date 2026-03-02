@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 // MARK: - Errors
 enum APIError: LocalizedError {
     case invalidResponse
@@ -15,7 +14,7 @@ enum APIError: LocalizedError {
     case rateLimitExceeded
     case network(Error)
     case decoding(Error)
-    
+
     var errorDescription: String? {
         switch self {
         case .invalidResponse:

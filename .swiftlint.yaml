@@ -1,5 +1,5 @@
 included:
-  - GithubTrending
+  - Climora
 
 excluded:
   - Pods
@@ -15,7 +15,7 @@ opt_in_rules:
   - redundant_nil_coalescing
 
 line_length:
-  warning: 160
+  warning: 120
   ignores_comments: true
 
 identifier_name:
