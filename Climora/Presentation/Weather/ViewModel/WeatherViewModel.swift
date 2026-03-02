@@ -55,16 +55,13 @@ final class WeatherViewModel {
 
         Task {
             do {
-                guard let weather = try await fetchCurrentWeatherUseCase
-                    .execute(cityName: cityName) else {
-                    state = .error("No weather data found")
-                    return
-                }
-
+                let weather = try await fetchCurrentWeatherUseCase
+                    .execute(cityName: cityName)
                 state = .success(weather)
-
+            } catch let error as DomainError {
+                state = .error(error.message)
             } catch {
-                state = .error(error.localizedDescription)
+                state = .error("Something went wrong.")
             }
         }
     }
@@ -74,16 +71,13 @@ final class WeatherViewModel {
 
         Task {
             do {
-                guard let weather = try await fetchCurrentWeatherUseCase
-                    .execute(latitude: latitude, longitude: longitude) else {
-                    state = .error("No weather data found")
-                    return
-                }
-
+                let weather = try await fetchCurrentWeatherUseCase
+                    .execute(latitude: latitude, longitude: longitude)
                 state = .success(weather)
-
+            } catch let error as DomainError {
+                state = .error(error.message)
             } catch {
-                state = .error(error.localizedDescription)
+                state = .error("Something went wrong.")
             }
         }
     }
