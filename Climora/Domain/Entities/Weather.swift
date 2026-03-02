@@ -5,7 +5,6 @@
 //  Created by Sridhar Prasath on 19.02.26.
 //
 
-
 // MARK: - Theme
 
 enum WeatherTheme {
@@ -20,14 +19,11 @@ struct Weather {
     let cityName: String
     let region: String
     let country: String
-    
     let temperature: String
     let feelsLike: String
     let humidity: String
-
     let conditionText: String
     let conditionCode: Int
-    
     let isDay: Bool
     var theme: WeatherTheme {
         return isDay ? .day : .night

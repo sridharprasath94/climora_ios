@@ -38,14 +38,14 @@ final class CoreLocationService: NSObject, LocationService {
         switch manager.authorizationStatus {
         case .notDetermined:
             manager.requestWhenInUseAuthorization()
-        
+
         case .authorizedWhenInUse, .authorizedAlways:
             manager.requestLocation()
-        
+
         case .denied, .restricted:
             print("Location permission denied or restricted")
             permissionSubject.send()
-        
+
         @unknown default:
             break
         }

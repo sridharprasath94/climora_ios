@@ -7,8 +7,7 @@
 
 import UIKit
 
-struct K {
-    
+struct Constants {
     struct WeatherViewController {
         static let storyboardName = "WeatherViewController"
         static let identifier = "WeatherViewController"

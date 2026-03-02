@@ -8,6 +8,6 @@
 import Foundation
 
 protocol WeatherRepository {
-    func fetchWeather(cityName : String) async throws -> Weather?
-    func fetchWeather(latitude: Double, longitude: Double) async throws -> Weather? 
+    func fetchWeather(cityName: String) async throws -> Weather?
+    func fetchWeather(latitude: Double, longitude: Double) async throws -> Weather?
 }
