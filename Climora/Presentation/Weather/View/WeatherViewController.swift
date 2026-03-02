@@ -58,6 +58,7 @@ class WeatherViewController: UIViewController {
                     print("Error:", message)
                 }
             }
+
             .store(in: &cancellables)
     }
 
