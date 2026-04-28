@@ -1,65 +1,135 @@
-# 🌤 Climora
+# Climora – iOS Weather App
 
-Climora is a scalable iOS weather application built using **Clean Architecture** principles and modern Swift practices.
-
-It demonstrates clean separation of concerns using MVVM, UseCases, Repository pattern, and Dependency Injection.
+Climora is a production-quality iOS weather application built with **Clean Architecture** and **MVVM**. It is designed for scalability, testability, and maintainability — with a clear separation between data, domain, and presentation layers.
 
 ---
 
-## 🏗 Architecture
+## Architecture
 
-The project follows a layered Clean Architecture structure:
+The project follows **Clean Architecture** with three distinct layers:
 
-- **App** – Application lifecycle & dependency container
-- **Core** – Shared utilities, constants, and theme configuration
-- **Data** – DTOs, API client, services, and repository implementations
-- **Domain** – Entities, repository contracts, and use cases
-- **Presentation** – ViewControllers and ViewModels
+```
+App/
+├── Data/           # DTOs, API client, repository implementations, location service
+├── Domain/         # Entities, repository protocols, use cases, domain errors
+└── Presentation/   # ViewModels (MVVM), ViewControllers, UI components
+```
 
-This ensures scalability, maintainability, and testability.
+### Layer Responsibilities
+
+| Layer | Responsibility |
+|---|---|
+| **Domain** | Pure Swift. Defines `Weather`, `ForecastDay` entities, `WeatherRepository` protocol, `FetchCurrentWeatherUseCase`, `FetchForecastUseCase`, and `DomainError`. No UIKit or framework dependencies. |
+| **Data** | Implements `WeatherRepository`. Owns the `APIClient`, `EndPoint` enum, `WeatherDTO`/`ForecastDTO` response models, and `CoreLocationService`. Maps raw API responses to domain models. |
+| **Presentation** | `WeatherViewModel` publishes `@Published` state enums consumed by `WeatherViewController` via Combine. |
+| **App** | `AppContainer` wires all dependencies and creates the initial view controller. `AppConfig` loads the API key from `.xcconfig`. |
+
+### Key Patterns
+
+- **Repository Pattern** — `WeatherRepository` protocol in Domain; `WeatherRepositoryImpl` in Data. The presentation layer never touches the network directly.
+- **Use Case Layer** — `FetchCurrentWeatherUseCase` and `FetchForecastUseCase` encapsulate business logic. Each has overloads for city-name and coordinate-based lookups.
+- **MVVM + Combine** — `WeatherViewModel` exposes `@Published var weatherState` and `@Published var forecastState`. The view subscribes with `sink` and reacts to state changes.
+- **Dependency Injection** — All dependencies flow through `AppContainer` using constructor injection. No singletons or service locators.
+- **Parallel async loading** — Current weather and 3-day forecast are fetched concurrently using two independent `Task {}` blocks. Each fails independently without cancelling the other.
 
 ---
 
-## ✨ Features
+## Features
 
 - Search weather by city name
-- Fetch weather using current location (CoreLocation)
-- Async/Await networking
-- Dynamic Day/Night theme switching
-- Background image adaptation based on weather state
-- Error handling & permission management
-- Secure API configuration using `.xcconfig`
+- Current location weather via CoreLocation
+- 3-day forecast loaded in parallel with current weather
+- Humidity and feels-like detail card
+- Dynamic background based on weather condition
+- Adaptive light/dark mode
+- Secure API key injection via `.xcconfig`
 
 ---
 
-## 🔐 Configuration
+## Project Structure
 
-The project uses `Config.xcconfig` to securely store API keys.
-
-To run the project locally:
-
-1. Copy:
-   ```
-   Config.xcconfig.example
-   ```
-2. Rename it to:
-   ```
-   Config.xcconfig
-   ```
-3. Add your Weather API key.
-
-The real `Config.xcconfig` file is ignored via `.gitignore`.
+```
+Climora/
+├── App/
+│   ├── AppConfig.swift               # Reads API key from xcconfig
+│   ├── AppContainer.swift            # Dependency wiring
+│   ├── AppDelegate.swift
+│   └── SceneDelegate.swift
+├── Core/
+│   └── Constants/
+│       ├── AppTheme.swift            # Weather condition → theme mapping
+│       ├── Colors.swift              # Semantic AppColors (light/dark)
+│       └── Constants.swift
+├── Data/
+│   ├── DTO/
+│   │   ├── WeatherDTO.swift          # Current weather response + mapping
+│   │   └── ForecastDTO.swift         # Forecast response + mapping
+│   ├── Network/
+│   │   ├── APIClient.swift           # Generic URLSession-based client
+│   │   ├── APIError.swift
+│   │   └── EndPoint.swift            # URL construction per endpoint
+│   ├── Repositories/
+│   │   └── WeatherRepositoryImpl.swift
+│   └── Services/
+│       └── CoreLocationService.swift
+├── Domain/
+│   ├── Entities/
+│   │   ├── Weather.swift
+│   │   └── ForecastDay.swift
+│   ├── Error/
+│   │   └── DomainError.swift
+│   ├── Repositories/
+│   │   └── WeatherRepository.swift   # Protocol
+│   └── UseCases/
+│       ├── FetchCurrentWeatherUseCase.swift
+│       └── FetchForecastUseCase.swift
+└── Presentation/
+    ├── DomainError+Presentation.swift # Error → user-facing message mapping
+    └── Weather/
+        ├── View/
+        │   ├── WeatherViewController.swift
+        │   ├── WeatherViewController+Alerts.swift
+        │   ├── WeatherViewController+Delegates.swift
+        │   └── ForecastCell.swift
+        └── ViewModel/
+            └── WeatherViewModel.swift
+```
 
 ---
 
-## 🛠 Requirements
+## Tech Stack
 
-- iOS 17+
-- Xcode 15+
-- Swift 5.9+
+| Technology | Usage |
+|---|---|
+| Swift | Primary language |
+| UIKit | UI (Storyboard + programmatic views) |
+| Combine | Reactive state binding (ViewModel → ViewController) |
+| Swift Concurrency | `async/await` for all network calls |
+| CoreLocation | Device GPS coordinates |
+| URLSession | HTTP networking (no third-party networking library) |
+| SwiftLint | Code style enforcement |
 
 ---
 
-## 📌 Purpose
+## Configuration
 
-This project serves as a portfolio-ready demonstration of scalable iOS architecture and modern development patterns.
+The project uses `.xcconfig` to inject the API key at build time without committing secrets.
+
+1. Copy `Config.xcconfig.example` and rename it to `Config.xcconfig`
+2. Add your [WeatherAPI](https://www.weatherapi.com) key:
+   ```
+   WEATHER_API_KEY = your_api_key_here
+   ```
+3. Build and run — `AppConfig` reads the key from the bundle's `Info.plist`.
+
+`Config.xcconfig` is excluded from version control via `.gitignore`.
+
+---
+
+## Requirements
+
+| Requirement | Version |
+|---|---|
+| iOS | 17.0+ |
+| Xcode | 16.0+ |
+| Swift | 5.10+ |
