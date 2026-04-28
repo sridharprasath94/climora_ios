@@ -218,6 +218,7 @@ class WeatherViewController: UIViewController {
         detailCard.backgroundColor = AppColors.glassCard
         forecastCard.backgroundColor = AppColors.glassCard
         searchTextField.textColor = AppColors.weatherText
+        searchTextField.tintColor = AppColors.weatherText
         searchTextField.backgroundColor = AppColors.searchBackground
     }
 
