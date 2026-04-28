@@ -18,6 +18,7 @@ enum EndPoint: APIRequest {
     case currentWeatherByCity(city: String)
     case currentWeatherByCoordinates(latitude: Double, longitude: Double)
     case forecastByCity(city: String, days: Int)
+    case forecastByCoordinates(latitude: Double, longitude: Double, days: Int)
 
     // MARK: - URL Request
     var urlRequest: URLRequest {
@@ -40,7 +41,8 @@ extension EndPoint {
         case .currentWeatherByCity,
              .currentWeatherByCoordinates:
             return "/current.json"
-        case .forecastByCity:
+        case .forecastByCity,
+             .forecastByCoordinates:
             return "/forecast.json"
         }
     }
@@ -64,6 +66,13 @@ extension EndPoint {
             return [
                 URLQueryItem(name: "key", value: AppConfig.Weather.apiKey),
                 URLQueryItem(name: "q", value: city),
+                URLQueryItem(name: "days", value: "\(days)"),
+            ]
+
+        case .forecastByCoordinates(let latitude, let longitude, let days):
+            return [
+                URLQueryItem(name: "key", value: AppConfig.Weather.apiKey),
+                URLQueryItem(name: "q", value: "\(latitude),\(longitude)"),
                 URLQueryItem(name: "days", value: "\(days)"),
             ]
         }
