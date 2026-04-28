@@ -245,8 +245,8 @@ private extension WeatherViewController {
     func setupProgrammaticViews() {
         setupConditionTextLabel()
         setupRegionLabel()
-        setupDetailCard()
         setupForecastCard()
+        setupDetailCard()
         applyColors()
         applySystemAppearanceOverlay()
     }
@@ -286,7 +286,7 @@ private extension WeatherViewController {
         NSLayoutConstraint.activate([
             detailCard.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             detailCard.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-            detailCard.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            detailCard.bottomAnchor.constraint(equalTo: forecastCard.topAnchor, constant: -12),
 
             humidityStack.leadingAnchor.constraint(equalTo: detailCard.leadingAnchor, constant: 16),
             humidityStack.centerYAnchor.constraint(equalTo: detailCard.centerYAnchor),
@@ -344,7 +344,7 @@ private extension WeatherViewController {
         NSLayoutConstraint.activate([
             forecastCard.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             forecastCard.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-            forecastCard.bottomAnchor.constraint(equalTo: detailCard.topAnchor, constant: -12),
+            forecastCard.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
 
             forecastLoadingIndicator.centerXAnchor.constraint(equalTo: forecastCard.centerXAnchor),
             forecastLoadingIndicator.topAnchor.constraint(equalTo: forecastCard.topAnchor, constant: 16),
