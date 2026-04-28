@@ -1,10 +1,3 @@
-//
-//  AppContainer.swift
-//  Clima
-//
-//  Created by Sridhar Prasath on 19.02.26.
-//
-
 import UIKit
 
 final class AppContainer {
@@ -13,10 +6,11 @@ final class AppContainer {
 
     // MARK: - Repositories
     private lazy var weatherRepository: WeatherRepository =
-    WeatherRepositoryImpl(apiClient: apiClient)
+        WeatherRepositoryImpl(apiClient: apiClient)
 
     // MARK: - UseCases
     private lazy var fetchCurrentWeatherUseCase = FetchCurrentWeatherUseCase(repository: weatherRepository)
+    private lazy var fetchForecastUseCase = FetchForecastUseCase(repository: weatherRepository)
 
     // MARK: - Location Service
     private lazy var locationService: LocationService = CoreLocationService()
@@ -25,9 +19,9 @@ final class AppContainer {
     @MainActor func makeWeatherViewController() -> UIViewController {
         let viewModel = WeatherViewModel(
             fetchCurrentWeatherUseCase: fetchCurrentWeatherUseCase,
+            fetchForecastUseCase: fetchForecastUseCase,
             locationService: locationService
         )
-
         return WeatherViewController.create(with: viewModel)
     }
 }
